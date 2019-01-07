@@ -1,39 +1,46 @@
-function Widget(width,height) {
-	console.log('Widget constructor called');
-	this.width = width || 50;
-	this.height = height || 50;
-	this.$elem = null;
-}
-
-Widget.prototype.render = function($where){
-	if (this.$elem) {
-		this.$elem.css({
-			width: this.width + "px",
-			height: this.height + "px"
-		}).appendTo($where);
+var Widget = {
+	init: function(width, height){
+		this.width = width || 50;
+		this.height = height || 50;
+		this.$elem = null;
+		// console.log('Widget init');
+	},
+	insert: function($where){
+		if (this.$elem) {
+			this.$elem.css({
+				width: this.width + "px",
+				height: this.height + "px"
+			}).appendTo($where);
+			// console.log('Widget insert');
+		}
 	}
-};
-
-function Button(width, height, label) {
-	console.log('Button constructor called');
-	Widget.call(this,width, height);
-	this.label = label;
+}
+var Button = Object.create(Widget);//wont be child class will be peer to be able to delegate to widget utility
+Button.setup = function(width, height, label) {
+	//delegated call
+	console.log(this);
+	this.init(width, height);
+	this.label = label || 'Default';
 	this.$elem = $("<button>").text(this.label);
+	// console.log('Button init');
 }
-
-Button.prototype.render = function($where){
-	Widget.prototype.render.call(this, $where);
+Button.build = function($where){
+	//delegated call
+	this.insert($where);
 	this.$elem.bind("click", this.onClick.bind(this));
+	// console.log('Button build');
 }
-Button.prototype.onClick = function (evt) {
+Button.onClick = function (evt) {
 	console.log("Button "+this.label+ " clicked!");
 }
 
 $(document).ready(function(){
 	var $body = $(document.body);
-	var btn1 = new Button(100,50,"Hello");
-	var btn2 = new Button(200, 100, "World");
+	var btn1 = Object.create(Button);
+	btn1.setup(100,50,"Hello");
+	var btn2 = Object.create(Button);
+	btn2.setup(200, 100, "World");
 
-	btn1.render($body);
-	btn2.render($body);
+	btn1.build($body);
+	btn2.build($body);
 });
