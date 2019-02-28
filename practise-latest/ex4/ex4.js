@@ -15,11 +15,10 @@ function Button(label, width, height) {
 	this.label = label;
 	Widget.call(this, height, width);
 	this.$elem = $("<button>").text(this.label);
-	this.$elem.bind('click', this.onClick.bind(this));
 }
-Button.prototype = new Widget();
 Button.prototype.renderButton = function ($where) {
-	this.render($where)
+	Widget.prototype.render.call(this, $where);
+	this.$elem.bind('click', this.onClick.bind(this));
 };
 Button.prototype.onClick = function () {
 	console.log(this.label);
