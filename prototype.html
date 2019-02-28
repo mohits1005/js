@@ -1,0 +1,22 @@
+<html>
+    <script>
+        var Foo = function(who){
+            this.me = who;
+        }
+        Foo.prototype.identify = function(){
+            console.log(this.me);
+        }
+        a1 = new Foo("a1");
+        // a1.identify();
+        a1.identify = function(){
+            Foo.prototype.identify.bind(this)();
+        }
+        a1.identify();
+        a2 = new Foo("a2");
+        a2.speak = function(){
+            this.identify();
+        }
+        // a2.speak();
+        // console.log(a1.constructor)
+    </script>
+</html>
