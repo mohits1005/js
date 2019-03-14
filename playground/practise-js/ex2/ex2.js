@@ -1,4 +1,4 @@
-var notesManager = (function(){
+var notesManager = function(){
 	var notes = [];
 	function addNote(note) {
 		$("#notes").prepend(
@@ -68,13 +68,14 @@ var notesManager = (function(){
 		$(evt.target).addClass("highlighted");
 	}
 
-	function init() {
+	function init(opts) {
+		$notes = $(opts.notes);
 		// build the initial list from the existing `notes` data
 		var html = "";
 		for (i = 0; i < notes.length; i++) {
 			html += "<a href='#' class='note'>" + notes[i] + "</a>";
 		}
-		$("#notes").html(html);
+		$notes.html(html);
 
 		// listen to "help" button
 		$("#open_help").bind("click", handleOpenHelp);
@@ -102,7 +103,7 @@ var notesManager = (function(){
 	};
 
 	return publicAPI;
-})();
+};
 // assume this data came from the database
 var notes = [
 	"This is the first note I've taken!",
@@ -110,6 +111,9 @@ var notes = [
 	"The quick brown fox jumped over the moon."
 ];
 $(document).ready(function(){
-	notesManager.loadData(notes);
-	notesManager.init();
+	var notesUtility = notesManager();
+	notesUtility.loadData(notes);
+	notesUtility.init({
+		notes: '#notes'
+	});
 });
