@@ -1,0 +1,100 @@
+<html>
+    <body>
+        <div>
+            Ahoy!
+        </div>
+        <div id="m">
+
+        </div>
+        <p></p>
+        <div class='n'></div>
+        <ol>
+            <li class="list-elem" >Brush</li>
+            <li class="list-elem">Paste</li>
+            <li class="list-elem">Toilet Paper</li>
+        </ol>
+        <form id='formel'>
+            <input type='text' id='first' name='first'>
+            <input type='text' id='second' name='second'>
+            <input type='submit' name='submit' value='submit'>
+        </form>
+        <div class="house" id="house">
+            <div class="g"><div class="p"><div class="s">Son</div><div class="d">Dau</div></div></div>
+            <div class="m"></div>
+        </div>
+        <!-- <img src=''> -->
+        <script>
+            // console.log('Aye');
+            document.write('Aye')
+            var el = document.getElementById("m");
+            el.innerHTML = 'Hello world!';
+            var el2 = document.getElementsByTagName('p');
+            el2[0].innerHTML = 'P Tag';
+            var el3 = document.getElementsByClassName('n');
+            el3[0].innerHTML = 'class n';
+            var el4 = document.querySelectorAll('.list-elem');
+            // console.log(el4);
+            el4[1].innerHTML = 'list-elem class 2nd elem';
+            var el5 = document.forms.formel.elements[0].name;
+            // console.log(el5);
+            var el6 = document.createElement("div")
+            el6.setAttribute('id','newDivEl');
+            el6.style.fontSize = 16;
+            el6.innerHTML = "New Element"
+            document.body.appendChild(el6);
+            // var el7 = document.querySelector('img');
+            // el7.src = 'new.jpg';
+            // el7.onclick = () => alert()
+            var el8 = document.createElement('Button');
+            el8.innerHTML = 'Click me';
+            el8.addEventListener('click', function(){
+                alert();
+            })
+            el8.addEventListener('mouseover', function () {
+                    alert('ha');
+                })
+            document.body.appendChild(el8);
+            var el9 = document.createElement('Button');
+            el9.innerHTML = 'Button';
+            el9.style.position = 'absolute';
+            el9.addEventListener('click',animateMe);
+            document.body.appendChild(el9);
+            var pos = 0;
+            function animateMe(){
+                var id = setInterval(move, 5);
+                function move() {
+                    if (pos == 350) {
+                        clearInterval(id);
+                        pos = 0;
+                    } else {
+                        pos++;
+                        el9.style.top = pos + "px";
+                        el9.style.left = pos + "px";
+                    }
+                }
+            }   
+            //node navigation
+            var el = document.getElementsByClassName('g')[0].parentNode;
+            // console.log(el);
+            var cel = document.getElementsByClassName('g')[0].childNodes;
+            // console.log(cel);
+            var fel = document.getElementsByClassName('p')[0].firstChild;
+            // console.log(fel);
+            var lel = document.getElementsByClassName('p')[0].lastChild;
+            // console.log(lel);
+            var nel = document.getElementsByClassName('p')[0].firstChild.nextSibling;
+            // console.log(nel);
+            var pel = document.getElementsByClassName('p')[0].lastChild.previousSibling;
+            // console.log(pel);
+            // console.log(pel.nodeType);
+            var son = document.createElement('div')
+            son.setAttribute('class','s2');
+            var sonText = document.createTextNode('Son 2');
+            son.appendChild(sonText);
+            var sonText2 = document.createTextNode('This is ');
+            son.appendChild(sonText2);
+            son.insertBefore(sonText2, sonText);
+            document.body.appendChild(son);
+        </script>
+    </body>
+</html>
