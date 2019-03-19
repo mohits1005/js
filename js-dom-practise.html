@@ -14,7 +14,7 @@
             <li class="list-elem">Toilet Paper</li>
         </ol>
         <form id='formel'>
-            <input type='text' id='first' name='first'>
+            <input type='text' id='first' name='first' onkeyup=track(event)>
             <input type='text' id='second' name='second'>
             <input type='submit' name='submit' value='submit'>
         </form>
@@ -95,6 +95,22 @@
             son.appendChild(sonText2);
             son.insertBefore(sonText2, sonText);
             document.body.appendChild(son);
+            function track(e){
+                console.log(e.which);
+            }
+            url = 'http://dummy.restapiexample.com/api/v1/employees';
+            const userAction = (async () => {
+                const response = await fetch(url);
+                const myJson = await response.json(); //extract JSON from the http response
+                console.log(myJson);
+            })()
+            fetch(url)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                console.log(JSON.stringify(myJson));
+            });
         </script>
     </body>
 </html>
