@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Exercise</title>
+</head>
+<body>
+
+<h1>Exercise</h1>
+
+
+<p id='p0'>
+	Hide me!
+</p>
+<p id="p1">
+	Change me!
+</p>
+<p id="p2" style="position: absolute">
+	Change me!
+</p>
+<button id="button">
+	Hide this p
+</button>
+<p id='p3'>
+	this p
+</p>
+<p id='p4'>
+	this p
+</p>
+<button id="btn1">
+	Click
+</button>
+<p id='test'>
+	This is some <b>bold</b> text in a paragraph.
+</p>
+<div class="outer2">
+	<div class="outer1">
+		<div class="inner1"></div>
+		<div class="inner2">
+			<div class="minner"></div>
+		</div>
+	</div>
+</div>
+<div class="pp-parent">
+	<p class="pp">1</p>
+	<p class="pp">2</p>
+	<p class="pp">3</p>
+	<p class="pp">4</p>
+	<p class="pp">5</p>
+</div>
+<script src="jquery.js"></script>
+<script>
+	$(document).ready(function () {
+		$("#p0").click(function () {
+			$(this).hide();
+		});
+		$("#p0").hover(function () {
+			// console.log("You entered p1!");
+		},
+		function () {
+			// console.log("Bye! You now leave p1!");
+		});
+		$("#p1").on({
+			mouseenter: function () {
+				$(this).css("background-color", "lightgray");
+			},
+			mouseleave: function () {
+				$(this).css("background-color", "lightblue");
+			},
+			click: function () {
+				$(this).css("background-color", "yellow");
+			}
+		});
+		$("#p2").animate({ left: '250px' }, 3000);
+		$("#button").click(function () {
+			//callback after hide completes
+			$("#p3").hide("slow", function () {
+				alert("The paragraph is now hidden");
+			});
+		});
+		//chaining
+		$("#p4").css("color", "red").slideUp(2000).slideDown(2000);
+		$("#btn1").click(function () {
+			alert("Text: " + $("#test").text()+" HTML: " + $("#test").html()+" Value: " + $("#test").val());
+		});
+		$("#test").attr('someval',39);
+		$("#test").append("Some appended text.");
+		$("#test").prepend("Some prepended text.");
+		// console.log($('.inner1').parent());
+		// console.log($('.inner1').parents("outer2"));
+		// console.log($('.outer1').children());
+		// console.log($('.outer2').find('.inner2'));
+		// console.log($('.inner1').siblings());
+		// console.log($('.inner1').next());
+		// console.log($('.inner2').prev());
+		// console.log($('.outer1').first());
+		// console.log($('.pp:first').text());
+		// console.log($('.pp:odd').text());
+		// console.log($('.pp:first-child').text());
+		// console.log($(".pp:first-of-type").text());
+		// console.log($(".pp:nth-child(2)").text());
+		// console.log($(".pp").eq(1).text());
+		url = 'http://dummy.restapiexample.com/api/v1/employees';
+		$.ajax({
+			url: url,
+			type: 'GET',
+			data: {
+			},
+			dataType: 'json',
+			success: function (json) {
+				console.log(json);
+			}
+		});
+	});
+</script>
+</body>
+</html>
